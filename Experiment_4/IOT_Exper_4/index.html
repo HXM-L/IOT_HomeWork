@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>物理实验4</title>
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css"/>
+		<script src="./js/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.*{
+				box-sizing: border-box;
+				margin: 0px;
+			}
+			html,body{
+				width: 100%;
+				height: 100%;
+			}
+			.container{
+				width: 500px;
+				height: 100%;
+				border: 2px solid transparent;
+			}
+			.header{
+				width: 100%;
+				height: 35%;
+				background-image: url(./img/head.jpg);
+				background-repeat: no-repeat;
+				background-size: 100% auto;
+			}
+			p{
+				margin: 25px auto;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#LedRedOn").click(function(){
+					// alert("http://127.0.0.1:8084/publish?topic=DFRobot/Seifer&msg=hello&iname=siot&ipwd=dfrobot");
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedRedOn&iname=siot&ipwd=dfrobot")
+				});
+				$("#LedGreenOn").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedGreenOn&iname=siot&ipwd=dfrobot")
+				});
+				$("#LedBlueOn").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedBlueOn&iname=siot&ipwd=dfrobot")
+				});
+				$("#AllOn").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=AllOn&iname=siot&ipwd=dfrobot")
+				});
+				$("#LedRedOff").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedRedOff&iname=siot&ipwd=dfrobot")
+				});
+				$("#LedGreenOff").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedGreenOff&iname=siot&ipwd=dfrobot")
+				});
+				$("#LedBlueOff").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=LedBlueOff&iname=siot&ipwd=dfrobot")
+				});
+				$("#AllOff").click(function(){
+					$.get("http://127.0.0.1:8084/publish?topic=2018324141/Amy&msg=AllOff&iname=siot&ipwd=dfrobot")
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header"></div>
+			<p>
+				<button type="button" id="LedRedOn" class="btn btn-danger">红灯亮</button>
+				<button type="button" id="LedGreenOn" class="btn btn-success">路灯亮</button>
+				<button type="button" id="LedBlueOn" class="btn btn-info">蓝灯亮</button>
+				<button type="button" id="AllOn" class="btn btn-warning">全部亮</button>
+			</p>
+			<p>
+				<button type="button" id="LedRedOff" class="btn btn-danger">红灯灭</button>
+				<button type="button" id="LedGreenOff" class="btn btn-success">路灯灭</button>
+				<button type="button" id="LedBlueOff" class="btn btn-info">蓝灯灭</button>
+				<button type="button" id="AllOff" class="btn btn-warning">全部灭</button>
+			</p>
+		</div>
+	</body>
+</html>
