@@ -1,0 +1,45 @@
+{
+  "name": {
+    "zh-cn": "OLED-12864显示屏",
+    "en": "OLED-12864 screen"
+  },
+  "description": {
+    "zh-cn": "MYSQL",
+    "en": "I2C OLED-2864 Display Module"
+  },
+  "author": "DFRobot",
+  "email": "MindPlus@dfrobot.com",
+  "license": "MIT",
+  "isBoard": false,
+  "id": "oled12864",
+  "version": "0.0.2",
+  "platform": [
+    "win",
+    "mac",
+    "web"
+  ],
+  "asset": {
+    "arduinoC": {
+      "dir": "arduinoC/",
+      "version": "0.0.2",
+      "board": [
+        "microbit",
+        "esp32",
+        "arduino"
+      ],
+      "main": "main.ts",
+      "files": [
+        "_images/icon.svg",
+        "_locales/zh-cn.json",
+        "_menus/arduino.json",
+        "_menus/arduinonano.json",
+        "_menus/esp32.json",
+        "_menus/leonardo.json",
+        "_menus/mega2560.json",
+        "_menus/microbit.json",
+        "main.ts",
+        "libraries/libraries.zip"
+      ]
+    }
+  }
+}
