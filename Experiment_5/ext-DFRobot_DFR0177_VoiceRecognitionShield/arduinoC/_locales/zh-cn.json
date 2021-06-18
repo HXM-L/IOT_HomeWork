@@ -1,0 +1,9 @@
+{
+    "DFRobot_DFR0177_VoiceRecognitionShield.voiceInit|block": "语音初始化",
+    "DFRobot_DFR0177_VoiceRecognitionShield.voiceStart|block": "语音开始识别",
+    "DFRobot_DFR0177_VoiceRecognitionShield.voiceAddCommand|block": "语音设置命令[CMD]标签设置为[NUM]",
+    "DFRobot_DFR0177_VoiceRecognitionShield.VoicevoiceMaxLength|block": "最长语音段时间[E]s ",
+    "DFRobot_DFR0177_VoiceRecognitionShield.voiceRead|block": "读取数据"
+ 
+}
+

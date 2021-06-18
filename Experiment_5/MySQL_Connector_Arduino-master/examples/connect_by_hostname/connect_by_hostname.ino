@@ -33,7 +33,7 @@ byte mac_addr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 char hostname[] = "www.google.com"; // change to your server's hostname/URL
 char user[] = "root";               // MySQL user login username
-char password[] = "secret";         // MySQL user login password
+char password[] = "root";         // MySQL user login password
 
 IPAddress server_ip;
 EthernetClient client;

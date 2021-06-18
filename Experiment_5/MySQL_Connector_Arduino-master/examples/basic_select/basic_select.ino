@@ -39,10 +39,10 @@ byte mac_addr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
 IPAddress server_addr(10,0,1,35);  // IP of the MySQL *server* here
 char user[] = "root";              // MySQL user login username
-char password[] = "secret";        // MySQL user login password
+char password[] = "root";        // MySQL user login password
 
 // Sample query
-char query[] = "SELECT population FROM world.city WHERE name = 'New York'";
+char query[] = "SELECT * FROM userinfo WHERE username = 'Amy'";
 
 EthernetClient client;
 MySQL_Connection conn((Client *)&client);

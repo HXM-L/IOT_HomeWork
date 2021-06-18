@@ -1,14 +1,14 @@
 {
   "name": {
-    "zh-cn": "OLED-12864显示屏",
+    "zh-cn": "MYSQL 数据库使用",
     "en": "OLED-12864 screen"
   },
   "description": {
-    "zh-cn": "MYSQL",
+    "zh-cn": "掌控连接MYSQL数据库实验",
     "en": "I2C OLED-2864 Display Module"
   },
-  "author": "DFRobot",
-  "email": "MindPlus@dfrobot.com",
+  "author": "Amy",
+  "email": "2602137886@qq.com",
   "license": "MIT",
   "isBoard": false,
   "id": "oled12864",
@@ -21,7 +21,7 @@
   "asset": {
     "arduinoC": {
       "dir": "arduinoC/",
-      "version": "0.0.2",
+      "version": "0.0.1",
       "board": [
         "microbit",
         "esp32",

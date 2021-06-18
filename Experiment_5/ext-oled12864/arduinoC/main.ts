@@ -27,136 +27,54 @@ enum BTN {
 }
 
 
-//% color="#AA278D" iconWidth=50 iconHeight=40
+//% color="#9900CC" iconWidth=50 iconHeight=40
 namespace oled12864 {
-    //% block="when press [BUTTON]" blockType="hat"
-    //% BUTTON.shadow="dropdown" BUTTON.options="BTN" BUTTON.defl="BTN.A"
-    export function buttonPress(parameter: any, block: any) {
-        let button = parameter.BUTTON.code;
-        button = replace(button);
-        let name = 'button' + button + 'PressCallback';
-        if(Generator.board === 'microbit'){
-            Generator.addEvent(name, "void", name, "", true);
-            Generator.addSetup(block.id, `onEvent(ID_BUTTON_${button}, PRESS, ${name});`, false);
-        }else{
-            Generator.addInclude('MPython', '#include <MPython.h>');
-            Generator.addEvent(name, "void", name, "", true);
-            Generator.addSetupMainTop("mPython.begin", "mPython.begin();");
-            Generator.addSetup(`button${button}.setPressedCallback`, `button${button}.setPressedCallback(${name});`);
-        }
+     //% block="username：[SS] password: [SN]  ipaddress:[sp1],[sp2],[sp3],[sp4] 数据库名称:[sdb]" blockType="command"
+    //% SS.shadow="string"   SS.defl="root"
+    //% SN.shadow="string"   SN.defl="root" 
+    //% sp1.shadow="number"   sp1.defl="192"
+    //% sp2.shadow="number"   sp2.defl="168"
+    //% sp3.shadow="number"   sp3.defl="226"
+    //% sp4.shadow="number"   sp4.defl="207"
+    //% sdb.shadow="string"   sdb.defl="experience_5",
+    export function InitMySQL(parameter: any, block: any) {  
+         /* 方形积木,数据库连接参数初始化 */  
+        let username=parameter.SS.code;
+        let password=parameter.SN.code;
+        let ip1=parameter.sp1.code;
+        let ip2=parameter.sp2.code;
+        let ip3=parameter.sp3.code;
+        let ip4=parameter.sp4.code;
+        Generator.addInclude('Mylibraray', '#include <MySQL_Connection.h>');
+        // Generator.addInclude('Mylibraray', '#include <Ethernet.h>');
+        Generator.addObject(`MACAddress`, `byte`, `mac_addr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };`);
+        Generator.addObject(`IPAddress`, `IPAddress`, `server_addr(${ip1},${ip2},${ip3},${ip4});`);
+        Generator.addObject(`char1`, `char`, `user[] = ${username};`);
+        Generator.addObject(`char2`, `char`, `password[] = ${password};`);
+        Generator.addObject(`EthernetClient`, `espClient`, `client;`);
+        Generator.addObject(`MySQL_Connection`, `MySQL_Connection`, `conn((Client *)&client);`);
+        Generator.addSetup("MySQLsetup", `Serial.begin(115200);`);
+        Generator.addSetup("MySQLsetup1", `while (!Serial);`);
+        Generator.addSetup("MySQLsetup1", `Serial.println("Connecting...");`);
     }
 
-    //% block="show [STR] on the [LINE] line" blockType="command"
-    //% STR.shadow="string" STR.defl=hello
-    //% LINE.shadow="dropdownRound" LINE.options="LINE" LINE.defl="LINE.1"
-    export function println(parameter: any, block: any) {
-        let str = parameter.STR.code
-        let line = parameter.LINE.code
-        Generator.addInclude('oled12864', '#include <oled12864.h>');
-        Generator.addObject(`myoled`, `OLED_12864`, `myoled;`);
-        Generator.addSetup(`myoled.begin`, `myoled.begin();`);
-        Generator.addCode(`myoled.setCursorLine(${line});\n\tmyoled.printLine(${str});`);
+
+    //% block="connect MYSQL" blockType="command"
+    export function ConnectMySQL(parameter: any, block: any) {
+
     }
 
-    //% block="show [STR] at x [X] y [Y]" blockType="command"
-    //% STR.shadow="string" STR.defl=hello
-    //% X.shadow="range" X.params.min=0 X.params.max=127 X.defl=0
-    //% Y.shadow="range" Y.params.min=0 Y.params.max=63 Y.defl=0
-    export function print(parameter: any, block: any) {
-        let str = parameter.STR.code
-        let x = parameter.X.code
-        let y = parameter.Y.code
-        Generator.addInclude('oled12864', '#include <oled12864.h>');
-        Generator.addObject(`myoled`, `OLED_12864`, `myoled;`);
-        Generator.addSetup(`myoled.begin`, `myoled.begin();`);
-        Generator.addCode(`myoled.setCursor(${x}, ${y});\n\tmyoled.print(${str});`);
+     //% block="connect database success?" blockType="boolean"
+    export function ConnectFlag(parameter: any, block: any) {
+        /* 菱形积木返回数据库连接是否成功 */
+        Generator.addCode([`conn.connect(server_addr, 3306, user, password)`,Generator.ORDER_UNARY_POSTFIX]);
     }
 
-    //% block="display QR code [STR] at x [X] y [Y] with size [SIZE]" blockType="command"
-    //% STR.shadow="string" STR.defl=http://mindplus.cc
-    //% X.shadow="range" X.params.min=0 X.params.max=127 X.defl=0
-    //% Y.shadow="range" Y.params.min=0 Y.params.max=63 Y.defl=0
-    //% SIZE.shadow="dropdownRound" SIZE.options="SIZE" SIZE.defl="SIZE.2"
-    export function qrcode(parameter: any, block: any) {
-        let str = parameter.STR.code
-        let x = parameter.X.code
-        let y = parameter.Y.code
-        let size = parameter.SIZE.code
-        Generator.addInclude('oled12864', '#include <oled12864.h>');
-        Generator.addObject(`myoled`, `OLED_12864`, `myoled;`);
-        Generator.addSetup(`myoled.begin`, `myoled.begin();`);
-        Generator.addCode(`myoled.qrcode(${x}, ${y}, ${str}, ${size});`);
+     //% block="table name:[st]" blockType="command"
+    //% st.shadow="string"   SS.defl="userinfo"
+    export function SelectMySQL(parameter: any, block: any) {
+        
+
     }
-
-    //% block="set the line width to [WIDTH] pixels" blockType="command"
-    //% WIDTH.shadow="range" WIDTH.params.min=1 WIDTH.params.max=128 WIDTH.defl=1
-    export function setLineWidth(parameter: any, block: any) {
-        let width = parameter.WIDTH.code
-        Generator.addInclude('oled12864', '#include <oled12864.h>');
-        Generator.addObject(`myoled`, `OLED_12864`, `myoled;`);
-        Generator.addSetup(`myoled.begin`, `myoled.begin();`);
-        Generator.addCode(`myoled.setLineWidth(${width});`);
-    }
-
-    //% block="get the line width" blockType="reporter"
-    export function getLineWidth(parameter: any, block: any) {
-        Generator.addInclude('oled12864', '#include <oled12864.h>');
-        Generator.addObject(`myoled`, `OLED_12864`, `myoled;`);
-        Generator.addSetup(`myoled.begin`, `myoled.begin();`);
-        Generator.addCode(`myoled.getLineWidth()`);
-    }
-
-    //% block="button [BUTTON] is pressed?" blockType="boolean"
-    //% Flag.shadow="boolean"
-    //% BUTTON.shadow="dropdown" BUTTON.options="BTN" BUTTON.defl="BTN.A"
-    export function buttonIsPressed(parameter: any, block: any) {
-        let button = parameter.BUTTON.code.replace("+", "");
-        let code;
-        if(Generator.board === 'microbit'){
-            if (button === 'A') {
-                code = `Button_A.isPressed() && !Button_B.isPressed()`;
-            } else if (button === 'B') {
-                code = `Button_B.isPressed() && !Button_A.isPressed()`;
-            } else {
-                code = `Button_AB.isPressed()`;
-            }
-            Generator.addCode([code, Generator.ORDER_UNARY_POSTFIX]);
-        }else{
-            code = `button${button}.isPressed()`;
-            Generator.addInclude('MPython', '#include <MPython.h>');
-            Generator.addSetupMainTop("mPython.begin", "mPython.begin();");
-            Generator.addCode([code, Generator.ORDER_UNARY_POSTFIX]);
-        }
-    }
-
-    //% block="not [Flag]" blockType="boolean"
-    //% Flag.shadow="boolean"
-    export function notTrue(parameter: any) {
-        console.log("notTrue==", parameter);
-        let code: string = '!' + (parameter.Flag.code || 'false') + '';
-        Generator.addCode([code, Generator.ORDER_UNARY_POSTFIX]);
-    }
-
-    function replace(str :string) {
-        return str.replace("+", "");
-    }
-    /*
-    //% block="AnalogWrite:[PIN_AnalogWrite],AnalogRead:[PIN_AnalogRead],DigitalWrite:[PIN_DigitalWrite],DigitalRead:[PIN_DigitalRead]" blockType="command"
-    //% PIN_AnalogWrite.shadow="dropdownRound" PIN_AnalogWrite.options="PIN_AnalogWrite"
-    //% PIN_AnalogRead.shadow="dropdownRound" PIN_AnalogRead.options="PIN_AnalogRead"
-    //% PIN_DigitalWrite.shadow="dropdownRound" PIN_DigitalWrite.options="PIN_DigitalWrite"
-    //% PIN_DigitalRead.shadow="dropdownRound" PIN_DigitalRead.options="PIN_DigitalRead"
-    export function blocktest(parameter: any)
-    {
-        let PIN_AnalogWrite=parameter.PIN_AnalogWrite.code;
-        let PIN_AnalogRead=parameter.PIN_AnalogRead.code;
-        let PIN_DigitalWrite=parameter.PIN_DigitalWrite.code;
-        let PIN_DigitalRead=parameter.PIN_DigitalRead.code;
-
-        Generator.addCode([`(${PIN_AnalogWrite},${PIN_AnalogRead},${PIN_DigitalWrite},${PIN_DigitalRead})`, Generator.ORDER_UNARY_POSTFIX]);
-    }
-
-    */
-
-
+   
 }

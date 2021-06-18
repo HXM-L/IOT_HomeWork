@@ -1,0 +1,28 @@
+{
+  "name": {
+    "zh-cn": "RFID-RC522模块",
+    "en": "RFID-RC522 Module"
+  },
+  "description": {
+    "zh-cn": "简单的读取S50复旦卡UID并从串口输出的RFID-RC522模块",
+    "en": "Simple read S50 fudan UID and from the serial port output of RFID card - RC522 module"
+  },
+  "author": "RZC",
+  "email": "rl0403y@163.com",
+  "license": "MIT",
+  "isBoard": false,
+  "id": "MFRC522",
+  "platform": ["win","mac","web"],
+  "version": "0.0.1",
+  "asset": {
+    "arduinoC": {
+      "dir": "arduinoC/",
+      "version": "0.0.1",
+      "board": [
+        "esp32",
+        "arduino"
+      ],
+      "main": "main.ts"
+    }
+  }
+}

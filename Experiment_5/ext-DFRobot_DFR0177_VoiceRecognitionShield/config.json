@@ -1,0 +1,37 @@
+{
+  "name": {
+    "zh-cn": "语音识别扩展板 ",
+    "en": "Voice Recognition Shield"
+  },
+  "description": {
+    "zh-cn": "离线语音识别的扩展板，支持Arduino uno。",
+    "en": "Expansion board for offline speech recognition, support Arduino uno."
+  },
+  "author": "Nick",
+  "email": "qichen@dfrobot.com",
+  "license": "MIT",
+  "isBoard": false,
+  "id": "DFRobot_DFR0177_VoiceRecognitionShield",
+  "version": "0.0.2",
+  "platform": [
+    "win"
+  ],
+  "asset": {
+    "arduinoC": {
+      "dir": "arduinoC/",
+      "version": "0.0.2",
+      "board": [
+        "arduino",
+        "mega2560",
+        "leonardo"
+      ],
+      "main": "main.ts",
+      "files": [
+        "_images/featured.png",
+        "_images/icon.svg",
+        "_locales/zh-cn.json",
+        "libraries/libraries.zip"
+      ]
+    }
+  }
+}
